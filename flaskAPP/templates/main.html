@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Предсказатель упругости и растяжения материала</title>
-</head>
-
-<head>
+    <title>Предсказатель прочности при растяжении материала</title>
+    <h1>Предсказатель прочности при растяжении материала</h1>
     <h1>Заполните данные</h1>
 </head>
 
 <body>
+
     <form action="{{url_for('main')}}" method="POST">
         <fieldset>
             <small>Соотношение матрица-наполнитель</small>
@@ -21,15 +20,19 @@
             <small>Плотность, кг/м3</small>
             <input type="text" name="Плотность, кг/м3">
             <br>
+            <br>
+            <small>Модуль упругости, ГПа</small>
+            <input type="text" name="модуль упругости, ГПа">
+            <br>
             <br> <small>Количество отвердителя, м.%</small>
             <input type="text" name="Количество отвердителя, м.%">
             <br>
             <br>
-            <small>Содержание эпоксидных групп,%_2</small>
+            <small>Содержание эпоксидных групп,%</small>
             <input type="text" name="Содержание эпоксидных групп,%_2">
             <br>
             <br>
-            <small>Температура вспышки, С_2</small>
+            <small>Температура вспышки, С</small>
             <input type="text" name="Температура вспышки, С_2">
             <br>
             <br>
@@ -53,31 +56,21 @@
             <input type="text" name="Шаг нашивки">
             <br>
             <br>
-            <small>Плотность нашивки</small>
-            <input type="text" name="Плотность нашивки">
+            <small>Плотность нашивки_лог</small>
+            <input type="text" name="Плотность нашивки_лог">
             <br>
             <br>
-            <small>day</small>
-            <input type="text" name="day">
-            <br>
-            <br>
-            <small>duration</small>
-            <input type="text" name="duration">
-            <br>
-            <br> <small>campaign</small>
-            <input type="text" name="campaign">
-            <br>
-            <br> <small>pdays</small>
-            <input type="text" name="pdays">
-            <br>
-            <br> <small>previous</small>
-            <input type="text" name="previous">
-            <br>
-            <br>
+            
             <button type="submit">ПОЛУЧИТЬ РЕШЕНИЕ</button>
         </fieldset>
     </form>
 
+    <div>
+        {%if result%}
+        <p>РЕЗУЛЬТАТ ПРОГНОЗА</p>
+        {{result}}
+        {% endif %}
+    </div>
 
 </body>
 
