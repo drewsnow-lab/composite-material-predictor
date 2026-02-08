@@ -78,9 +78,37 @@ def main():
       #return result
       result_message = f"Прочность при растяжении, МПа: {prediction_formatted}"
       
-      return render_template('main.html', result = result_message)
+      return render_template('result.html', result = result_message)
+
+      return
+
+@app.route('/api/v1/add_message/', methods = ['POST', 'GET'])
+def api_message():
+   get_message_x = request.json
+   X = get_message_x['X_scaled']
+   predicted_value2 = gb2.predict(X)
+   prediction = float(predicted_value2[0])
+   prediction_formatted = round(prediction, 2)
+   #return result
+   result_message = f"Прочность при растяжении, МПа: {prediction_formatted}"
+      
+   return jsonify(str(result_message))
 
 
+@app.route('/api/v2/add_message/', methods = ['POST', 'GET'])
+def api_message_v2():
+   get_message_x = request.json
+   X_api = get_message_x['X_from_desktop']
+   #scaler
+   X_scaled_api = num_scaler.transform([X_api])
+   print('X_scaled:', X_scaled_api)
+   predicted_value3 = gb2.predict(X_scaled_api)
+   prediction = float(predicted_value3[0])
+   prediction_formatted = round(prediction, 2)
+   #return result
+   result_message = f"Прочность при растяжении, МПа: {prediction_formatted}"
+      
+   return jsonify(str(result_message))
 
 if __name__ == '__main__':
     app.run(debug=True)
